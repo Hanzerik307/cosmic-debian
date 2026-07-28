@@ -1,0 +1,11 @@
+# Build work directories & output
+/cosmic-epoch/
+/cosmic-trixie-addons/
+/local-repo/
+
+# Logs and tar backups
+*.log
+*.tar.gz
+
+# OS metadata
+.DS_Store

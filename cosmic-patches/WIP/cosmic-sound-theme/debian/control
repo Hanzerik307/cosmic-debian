@@ -1,0 +1,12 @@
+Source: cosmic-sound-theme
+Section: sound
+Priority: optional
+Maintainer: hanzerik307 <hanzerik307@cosmic-build.home.arpa>
+Build-Depends: debhelper-compat (= 13), meson, ninja-build
+Standards-Version: 4.6.2
+
+Package: cosmic-sound-theme
+Architecture: all
+Depends: ${misc:Depends}
+Description: Sound theme for the COSMIC desktop environment
+ Provides default sound themes and source files for COSMIC.
