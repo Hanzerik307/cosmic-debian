@@ -1,2 +1,2 @@
 # cosmic-debian
-Scripts for building COSMIC DE on Debian
+Basic scripts I use to build COSMIC Epoch DE on Debian Trixie
