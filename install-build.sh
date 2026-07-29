@@ -61,8 +61,9 @@ sudo apt update && sudo apt install \
   nasm \
   ninja-build \
   pkg-config \
-  sassc \
   rustup \
+  sassc \
+  tmux \
   udev
 
 # === Install LFS support for git to clone all of the COSMIC DE Source Files ===
