@@ -3,7 +3,7 @@ Basic scripts I use to build COSMIC Epoch DE on Debian Trixie/Forky (Have tested
 
 All this script (build-cosmic.sh) does is build COSMIC EPOCH using common Debian tools when cloning from the github repo using the debian/control and associated files that System76 provides. And some small edits (cosmic-patches/) by me to the control files to remove anything Pop_Os specific that doesn't come from the Debian Repos.
 
-I build in an `incus` Debian/13 system container, or `incus` Debian/13 VM. The container builds faster because I don't limit the number of CPUs/Ram/Disk like I do for a VM. My VM setup for something like this is 6-8 cpu, 12gb ram, 100gb disk. But both are using a network bridge so other machines on my network can see the build/repo. 
+I build in an `incus` Debian 13/14 system container, or `incus` Debian 13/14 VM. The container builds faster because I don't limit the number of CPUs/Ram/Disk like I do for a VM. My VM setup for something like this is 6-8 cpu, 12gb ram, 100gb disk. But both are using a network bridge so other machines on my network can see the build/repo. 
 
 I  would suggest you try the desktop on a VM first to see if you want to install on bare-metal, or alongside a DE like Gnome or KDE. I have tested my built packages on a minimal Debian Trixie install (Standard System Utilities is the only thing I install via the Debian netinstall ISO), against a new updated install of Pop!_OS and I have almost the same warnings/errors as they appear in Pop_OS when starting COSMIC Apps from a terminal, so I guess I'm doing something OK as far as the built packages matching pretty much what System76 COSMIC DE is building. The only difference is in the naming of the paths for the build; they build under /build and I build under /home/cosmic, but the warnings/errors match.
 
@@ -12,23 +12,14 @@ Change these in build-cosmic.sh to update the changelog/package info to fit your
 export DEBFULLNAME="Cosmic Builder"
 export DEBEMAIL="cosmic-builder@cosmic-build.home.arpa"
 ```
+The build script should automatically detect which Debian Release you are using (Trixie or Forky/Testing)
 
-If building for different versions of Debian you can change this to reflect it in the deb file names:
-Trixie:
-```
-FULL_VERSION="${COSMIC_VERSION}+deb13-${BUILD_DATE}"
-```
-Forky:
-```
-FULL_VERSION="${COSMIC_VERSION}+deb14-${BUILD_DATE}"
-```
-
-Currently will build COSMIC Epoch 1.5.0
+Currently is setup to build COSMIC Epoch 1.5.0. Can change this later as different versions are released:
 ```
 COSMIC_VERSION="1.5.0"
 ```
 
-After my repo is setup (On the same machine as the build was performed on), I create a `/etc/apt/sources.d/cosmic.list` on a client machine, and its a simple `deb [trusted=yes] http://<name or ip>:8080 trixie main`. You could setup Apache or nginx as a webserver and host the packages that way, but the simple `python3 -m http.server 8080 -d /path/to/local-repo` works for my local lan. I do use `tmux` so I can exit out of the session and keep the repo up and running. I wouldn't host this repo on the internet using the python3 module though, just my local lan. After that's all done I'd do a `sudo apt update && sudo apt upgrade` on the client and then:
+After my repo is setup (On the same machine as the build was performed on), I create a `/etc/apt/sources.d/cosmic.list` on a client machine, and its a simple `deb [trusted=yes] http://<name or ip>:8080 trixie main` or `deb [trusted=yes] http://<name or ip>:8080 forky main`. You could setup Apache or nginx as a webserver and host the packages that way, but the simple `python3 -m http.server 8080 -d /path/to/local-repo` works for my local lan. I do use `tmux` so I can exit out of the session and keep the repo up and running. I wouldn't host this repo on the internet using the python3 module though, just my local lan. After that's all done I'd do a `sudo apt update && sudo apt upgrade` on the client and then:
 ```
 sudo apt install cosmic-initial-setup cosmic-session cosmic-debian-addons
 ```
