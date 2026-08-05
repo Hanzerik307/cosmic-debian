@@ -132,8 +132,8 @@ for component in "${SOURCE_COMPONENTS[@]}"; do
     fi
 done
 
-# ====================== TRIXIE META PACKAGE ======================
-META_PKG="cosmic-trixie-addons"
+# ====================== DEBIAN META PACKAGE ======================
+META_PKG="cosmic-debian-addons"
 
 mkdir -p "$META_PKG/DEBIAN"
 cp "$PATCH_DIR/${META_PKG}.control" "$META_PKG/DEBIAN/control"
