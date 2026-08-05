@@ -1,4 +1,4 @@
-Package: cosmic-trixie-addons
+Package: cosmic-debian-addons
 Version: 1.0
 Section: misc
 Priority: optional
@@ -6,4 +6,4 @@ Architecture: all
 Maintainer: Hanzerik307
 Depends: bluez, bluez-cups, bluez-obexd, geoclue-2.0, gvfs, gvfs-backends, gvfs-fuse, libfontconfig1, libfreetype6, libgumbo3, libharfbuzz0b, libjbig2dec0, libopenjp2-7, packagekit, pipewire-audio, power-profiles-daemon, upower, wireplumber, xdg-desktop-portal-gtk, zlib1g
 Recommends: bluez-tools, btop, fastfetch, firefox-esr, flatpak, gstreamer1.0-libav, gstreamer1.0-plugins-bad, htop, nano, openssh-client, sound-theme-freedesktop
-Description: Cosmic Debian Trixie Meta Pkg
+Description: Cosmic Debian Meta Pkg
