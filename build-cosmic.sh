@@ -14,7 +14,31 @@ set -euo pipefail
 export DEBFULLNAME="Cosmic Builder"
 export DEBEMAIL="cosmic-builder@cosmic-build.home.arpa"
 
-# This ensures you can run this script form anywhere
+# ================== DEBIAN RELEASE DETECTION ==================
+DEB_CODENAME="trixie" # Default fallback
+DEB_TAG="deb13"
+
+if [[ -f /etc/os-release ]]; then
+    source /etc/os-release
+
+    case "${VERSION_CODENAME:-}" in
+        trixie)
+            DEB_CODENAME="trixie"
+            DEB_TAG="deb13"
+            ;;
+        forky|sid)
+            DEB_CODENAME="forky"
+            DEB_TAG="deb14"
+            ;;
+        *)
+            echo "Warning: Unrecognized release (${VERSION_CODENAME:-unknown}). Defaulting to trixie (deb13)."
+            DEB_CODENAME="trixie"
+            DEB_TAG="deb13"
+            ;;
+    esac
+fi
+
+# This ensures you can run this script from anywhere
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 BASE_DIR="${SCRIPT_DIR}/cosmic-epoch"
@@ -25,8 +49,8 @@ PATCH_DIR="${SCRIPT_DIR}/cosmic-patches"
 COSMIC_VERSION="1.5.0"
 BUILD_DATE=$(date +%Y%m%d)
 
-# Formats output like: 1.5.0+deb13-20260725
-FULL_VERSION="${COSMIC_VERSION}+deb13-${BUILD_DATE}"
+# Formats output like: 1.5.0+deb13-20260804 or 1.5.0+deb14-20260804
+FULL_VERSION="${COSMIC_VERSION}+${DEB_TAG}-${BUILD_DATE}"
 
 # Log file output location
 LOG_FILE="${SCRIPT_DIR}/build-${BUILD_DATE}.log"
@@ -41,7 +65,7 @@ RED='\033[0;31m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-echo -e "${BOLD}${BLUE}=== Starting COSMIC DE Build (${FULL_VERSION}) ===${NC}"
+echo -e "${BOLD}${BLUE}=== Starting COSMIC DE Build (${FULL_VERSION} on ${DEB_CODENAME}) ===${NC}"
 
 # Ensure dch is installed before running
 if ! command -v dch >/dev/null 2>&1; then
@@ -104,7 +128,7 @@ for component in "${SOURCE_COMPONENTS[@]}"; do
             DEBFULLNAME="${DEBFULLNAME}" DEBEMAIL="${DEBEMAIL}" dch -v "${FULL_VERSION}" \
                    -D "unstable" \
                    --force-distribution \
-                   "Local rebuild ${BUILD_DATE}" 2>/dev/null || {
+                   "Local rebuild ${BUILD_DATE} for ${DEB_CODENAME}" 2>/dev/null || {
                 echo -e "${RED}Error: dch failed to update changelog for $component${NC}"
                 exit 1
             }
@@ -114,7 +138,7 @@ for component in "${SOURCE_COMPONENTS[@]}"; do
                    --package "${component}" \
                    -v "${FULL_VERSION}" \
                    -D "unstable" \
-                   "Initial build for Trixie" 2>/dev/null || {
+                   "Initial build for ${DEB_CODENAME}" 2>/dev/null || {
                 echo -e "${RED}Error: dch failed to create changelog for $component${NC}"
                 exit 1
             }
@@ -163,10 +187,10 @@ if [[ -d "$REPO_DIR" ]]; then
     rm -rf "$REPO_DIR"
 fi
 
-echo -e " ${BLUE}-> Creating APT repository indexes...${NC}"
+echo -e " ${BLUE}-> Creating APT repository indexes for ${DEB_CODENAME}...${NC}"
 
-# Define standard Debian repo paths
-DIST_DIR="$REPO_DIR/dists/trixie"
+# Define standard Debian repo paths dynamically based on target release
+DIST_DIR="$REPO_DIR/dists/${DEB_CODENAME}"
 BINARY_DIR="$DIST_DIR/main/binary-amd64"
 POOL_DIR="$REPO_DIR/pool/main"
 
@@ -180,12 +204,12 @@ cd "$REPO_DIR"
 apt-ftparchive packages pool/main > "$BINARY_DIR/Packages" 2>/dev/null
 gzip -9c "$BINARY_DIR/Packages" > "$BINARY_DIR/Packages.gz"
 
-# Generate Release metadata file inside dists/trixie
+# Generate Release metadata file inside dists/${DEB_CODENAME}
 cat > "$DIST_DIR/Release" <<EOF
 Origin: Local COSMIC Build
-Label: Cosmic Trixie
-Suite: trixie
-Codename: trixie
+Label: Cosmic Debian (${DEB_CODENAME})
+Suite: ${DEB_CODENAME}
+Codename: ${DEB_CODENAME}
 Components: main
 Architectures: amd64
 Date: $(date -u +"%a, %d %b %Y %T %Z")
@@ -204,10 +228,10 @@ echo "Host packages directly via HTTP ***Local Lan Testing Only*** (e.g. python3
 echo "Use a proper HTTP server if hosting via internet, the python module should only be used for local lan testing!"
 echo ""
 echo "Client machine sources list setup example (Change to match your build machine IP or hostname):"
-echo "   deb [trusted=yes] http://cosmic-build:8080 trixie main"
+echo "   deb [trusted=yes] http://cosmic-build:8080 ${DEB_CODENAME} main"
 echo ""
-echo "Or for installing on the same machine it was built on"
-echo "   deb [trusted=yes] file://$REPO_DIR trixie main"
+echo "Or for installing on the same machine it was built on:"
+echo "   deb [trusted=yes] file://$REPO_DIR ${DEB_CODENAME} main"
 echo ""
-echo "Then run: sudo apt update && sudo apt install cosmic-session cosmic-initial-setup cosmic-trixie-addons"
+echo "Then run: sudo apt update && sudo apt install cosmic-session cosmic-initial-setup cosmic-debian-addons"
 echo -e "${GREEN}========================================${NC}"
