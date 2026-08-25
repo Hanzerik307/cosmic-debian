@@ -49,7 +49,7 @@ PATCH_DIR="${SCRIPT_DIR}/cosmic-patches"
 COSMIC_VERSION="1.6.0"
 BUILD_DATE=$(date +%Y%m%d)
 
-# Formats output like: 1.5.0+deb13-20260804 or 1.5.0+deb14-20260804
+# Formats output like: 1.7.0+deb13-20260804 or 1.7.0+deb14-20260804
 FULL_VERSION="${COSMIC_VERSION}+${DEB_TAG}-${BUILD_DATE}"
 
 # Log file output location
