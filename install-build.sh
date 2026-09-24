@@ -41,6 +41,7 @@ sudo apt update && sudo apt install \
   libgstreamer-plugins-bad1.0-dev \
   libgstreamer-plugins-base1.0-dev \
   libgstreamer1.0-dev \
+  libheif-dev \
   libinput-dev \
   libpam0g-dev \
   libpipewire-0.3-dev \
@@ -64,7 +65,8 @@ sudo apt update && sudo apt install \
   rustup \
   sassc \
   tmux \
-  udev
+  udev \
+  zlib1g-dev
 
 # === Install LFS support for git to clone all of the COSMIC DE Source Files ===
 git lfs install
