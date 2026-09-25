@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: cosmic-sound-theme
+Source: https://github.com/pop-os/cosmic-sound-theme
+
+Files: *
+Copyright: 2026 System76
+License: GPL-3.0-or-later
+
