@@ -46,10 +46,10 @@ REPO_DIR="$HOME/local-repo"
 PATCH_DIR="${SCRIPT_DIR}/cosmic-patches"
 
 # Edit Version to match cosmic-epoch release
-COSMIC_VERSION="1.8.0"
+COSMIC_VERSION="1.9.0"
 BUILD_DATE=$(date +%Y%m%d)
 
-# Formats output like: 1.8.0+deb13-20260804 or 1.8.0+deb14-20260804
+# Formats output like: 1.9.0+deb13-20260924 or 1.9.0+deb14-20260924
 FULL_VERSION="${COSMIC_VERSION}+${DEB_TAG}-${BUILD_DATE}"
 
 # Log file output location
@@ -95,7 +95,7 @@ SOURCE_COMPONENTS=(
     cosmic-idle cosmic-initial-setup cosmic-launcher cosmic-monitor
     cosmic-notifications cosmic-osd cosmic-osk cosmic-panel cosmic-player
     cosmic-randr cosmic-screenshot cosmic-session cosmic-settings
-    cosmic-settings-daemon cosmic-store cosmic-term cosmic-viewer cosmic-workspaces-epoch
+    cosmic-settings-daemon cosmic-sound-theme cosmic-store cosmic-term cosmic-viewer cosmic-workspaces-epoch
     pop-launcher xdg-desktop-portal-cosmic
 )
 
