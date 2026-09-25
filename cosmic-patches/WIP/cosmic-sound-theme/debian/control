@@ -1,7 +1,7 @@
 Source: cosmic-sound-theme
 Section: sound
 Priority: optional
-Maintainer: hanzerik307 <hanzerik307@cosmic-build.home.arpa>
+Maintainer: Cosmic Builder <cosmic-builder@cosmic-build.home.arpa>
 Build-Depends: debhelper-compat (= 13), meson, ninja-build
 Standards-Version: 4.6.2
 
