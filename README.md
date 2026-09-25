@@ -1,5 +1,5 @@
 # cosmic-debian
-Basic scripts I use to build COSMIC Epoch DE on Debian Trixie/Forky (Have tested it on Forky, I just don't run Forky/Testing as a daily driver. The `install-build.sh` installs the build requirements, some may not be needed, but I wanted to make sure I had everything needed before starting. The `find-depends.sh` I will use when changes are made to the cosmic-epoch debian/control files to see if my scripts may need updating. The `build-cosmic.sh` is the script that actually builds the packages.
+Basic scripts I use to build COSMIC Epoch DE on Debian Trixie/Forky. The `install-build.sh` installs the build requirements, some may not be needed, but I wanted to make sure I had everything needed before starting. The `find-depends.sh` I will use when changes are made to the cosmic-epoch debian/control files to see if my scripts may need updating. The `build-cosmic.sh` is the script that actually builds the packages.
 
 All this script (build-cosmic.sh) does is build COSMIC EPOCH using common Debian tools when cloning from the github repo using the debian/control and associated files that System76 provides. And some small edits (cosmic-patches/) by me to the control files to remove anything Pop_Os specific that doesn't come from the Debian Repos.
 
@@ -14,9 +14,9 @@ export DEBEMAIL="cosmic-builder@cosmic-build.home.arpa"
 ```
 The build script should automatically detect which Debian Release you are using (Trixie or Forky/Testing)
 
-Currently is setup to build COSMIC Epoch 1.8.0. Can change this later as different versions are released:
+Currently is setup to build COSMIC Epoch 1.9.0. Can change this later as different versions are released:
 ```
-COSMIC_VERSION="1.8.0"
+COSMIC_VERSION="1.9.0"
 ```
 
 After my repo is setup (On the same machine as the build was performed on), I create a `/etc/apt/sources.d/cosmic.list` on a client machine, and its a simple `deb [trusted=yes] http://<name or ip>:8080 trixie main` or `deb [trusted=yes] http://<name or ip>:8080 forky main`. You could setup Apache or nginx as a webserver and host the packages that way, but the simple `python3 -m http.server 8080 -d /path/to/local-repo` works for my local lan. I do use `tmux` so I can exit out of the session and keep the repo up and running. I wouldn't host this repo on the internet using the python3 module though, just my local lan. After that's all done I'd do a `sudo apt update && sudo apt upgrade` on the client and then:
