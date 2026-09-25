@@ -1,6 +1,6 @@
 # Build work directories & output
 /cosmic-epoch/
-/cosmic-trixie-addons/
+/cosmic-debian-addons/
 /local-repo/
 
 # Logs and tar backups
