@@ -86,6 +86,7 @@ if [[ ! -d "$BASE_DIR" ]]; then
     exit 1
 fi
 
+cp -r "$PATCH_DIR"/cosmic-sound-theme/debian "$BASE_DIR"/cosmic-sound-theme/
 cd "$BASE_DIR" || { echo -e "${RED}Error: Cannot cd to $BASE_DIR${NC}"; exit 1; }
 
 # COSMIC EPOCH Source packages to build
