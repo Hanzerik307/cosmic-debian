@@ -93,9 +93,9 @@ SOURCE_COMPONENTS=(
     cosmic-icons cosmic-wallpapers cosmic-applets cosmic-applibrary
     cosmic-bg cosmic-comp cosmic-edit cosmic-files cosmic-greeter
     cosmic-idle cosmic-initial-setup cosmic-launcher cosmic-monitor
-    cosmic-notifications cosmic-osd cosmic-panel cosmic-player
+    cosmic-notifications cosmic-osd cosmic-osk cosmic-panel cosmic-player
     cosmic-randr cosmic-screenshot cosmic-session cosmic-settings
-    cosmic-settings-daemon cosmic-store cosmic-term cosmic-workspaces-epoch
+    cosmic-settings-daemon cosmic-store cosmic-term cosmic-viewer cosmic-workspaces-epoch
     pop-launcher xdg-desktop-portal-cosmic
 )
 
