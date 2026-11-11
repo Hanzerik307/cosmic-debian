@@ -2,7 +2,6 @@
 #
 # Installs all cosmic-epoch build requirements that I have found
 # Some may not be needed, but I wanted to be thorough before starting
-# I typically reboot after installing and configuring rustup/cargo/just
 
 echo "=== Istalling Required Packages to Build COSMIC DE ==="
 
@@ -11,6 +10,7 @@ echo "=== Istalling Required Packages to Build COSMIC DE ==="
 sudo apt update && sudo apt install \
   apt-utils \
   build-essential \
+  cargo \
   clang \
   cmake \
   curl \
@@ -22,6 +22,7 @@ sudo apt update && sudo apt install \
   git \
   git-lfs \
   intltool \
+  just \
   imagemagick \
   libclang-dev \
   libdav1d-dev \
@@ -62,7 +63,7 @@ sudo apt update && sudo apt install \
   nasm \
   ninja-build \
   pkg-config \
-  rustup \
+  rust-all \
   sassc \
   tmux \
   udev \
@@ -71,15 +72,4 @@ sudo apt update && sudo apt install \
 # === Install LFS support for git to clone all of the COSMIC DE Source Files ===
 git lfs install
 
-# === Configure rustup and install just ===
-rustup toolchain install stable
-#
-# Install just via cargo
-cargo install just
-#
-# export the just binary to your $PATH
-echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
-#
-# Source your modified .bashrc file or logout/login
-source ~/.bashrc
 # I typically reboot at this point
