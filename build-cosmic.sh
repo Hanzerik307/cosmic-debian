@@ -14,29 +14,9 @@ set -euo pipefail
 export DEBFULLNAME="Cosmic Builder"
 export DEBEMAIL="cosmic-builder@cosmic-build.home.arpa"
 
-# ================== DEBIAN RELEASE DETECTION ==================
-DEB_CODENAME="trixie" # Default fallback
-DEB_TAG="deb13"
-
-if [[ -f /etc/os-release ]]; then
-    source /etc/os-release
-
-    case "${VERSION_CODENAME:-}" in
-        trixie)
-            DEB_CODENAME="trixie"
-            DEB_TAG="deb13"
-            ;;
-        forky|sid)
-            DEB_CODENAME="forky"
-            DEB_TAG="deb14"
-            ;;
-        *)
-            echo "Warning: Unrecognized release (${VERSION_CODENAME:-unknown}). Defaulting to trixie (deb13)."
-            DEB_CODENAME="trixie"
-            DEB_TAG="deb13"
-            ;;
-    esac
-fi
+# ================== DEBIAN RELEASE FORKY ==================
+DEB_CODENAME="forky"
+DEB_TAG="deb14"
 
 # This ensures you can run this script from anywhere
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
