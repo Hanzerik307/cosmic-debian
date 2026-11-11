@@ -1,4 +1,8 @@
 # cosmic-debian
+*** Updated 11 November 2026 ***
+Modified scripts to build against Debian Forky (Testing) only.
+I only use Debian Forky on my desktops, so no need for me to maintain scripts for Trixie.
+
 Basic scripts I use to build COSMIC Epoch DE on Debian Forky. The `install-build.sh` installs the build requirements, some may not be needed, but I wanted to make sure I had everything needed before starting. The `find-depends.sh` I will use when changes are made to the cosmic-epoch debian/control files to see if my scripts may need updating. The `build-cosmic.sh` is the script that actually builds the packages.
 
 All this script (build-cosmic.sh) does is build COSMIC EPOCH using common Debian tools when cloning from the github repo using the debian/control and associated files that System76 provides. And some small edits (cosmic-patches/) by me to the control files to remove anything Pop_Os specific that doesn't come from the Debian Repos.
