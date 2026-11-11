@@ -96,8 +96,8 @@ SOURCE_COMPONENTS=(
     cosmic-idle cosmic-initial-setup cosmic-launcher cosmic-monitor
     cosmic-notifications cosmic-osd cosmic-osk cosmic-panel cosmic-player
     cosmic-randr cosmic-screenshot cosmic-session cosmic-settings
-    cosmic-settings-daemon cosmic-sound-theme cosmic-store cosmic-term cosmic-viewer cosmic-workspaces-epoch
-    pop-launcher xdg-desktop-portal-cosmic
+    cosmic-settings-daemon cosmic-sound-theme cosmic-store cosmic-term
+    cosmic-viewer cosmic-workspaces-epoch pop-launcher xdg-desktop-portal-cosmic
 )
 
 echo -e " ${BLUE}-> Building components...Can take a long while depending on CPU speed.${NC}"
