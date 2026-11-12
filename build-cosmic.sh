@@ -126,7 +126,10 @@ for component in "${SOURCE_COMPONENTS[@]}"; do
         fi
 
         # Build package
-        if dpkg-buildpackage -b -d -us -uc >/dev/null 2>&1; then
+        echo -e "    ${BLUE}Building ${component}...${NC}"
+        if dpkg-buildpackage -b -d -us -uc; then
+        # Un-comment line below, and comment above line to restore silent build.
+        # if dpkg-buildpackage -b -d -us -uc >/dev/null 2>&1; then
             echo -e "    [${GREEN}OK${NC}] Built ${component}"
         else
             echo -e "    [${RED}FAIL${NC}] Build failed for $component"
